@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PressWave Media – Your Pulse on the World</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --ink: #1a0a2e;
+      --paper: #f4f2f8;
+      --red: #7c3aed;
+      --gold: #a0a0b8;
+      --muted: #5a5a7a;
+      --white: #ffffff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Source Serif 4', Georgia, serif;
+      background: var(--paper);
+      color: var(--ink);
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--ink);
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 56px;
+    }
+    nav .logo {
+      font-family: 'Playfair Display', serif;
+      color: var(--white); font-size: 1.4rem; letter-spacing: 2px;
+      text-decoration: none;
+    }
+    nav .logo span { color: var(--red); }
+    nav ul { list-style: none; display: flex; gap: 32px; }
+    nav ul a {
+      color: #ccc; text-decoration: none;
+      font-size: .85rem; letter-spacing: 1px; text-transform: uppercase;
+      transition: color .2s;
+    }
+    nav ul a:hover { color: var(--red); }
+
+    /* ── HERO ── */
+    #home {
+      background: linear-gradient(135deg, #1a0a2e 60%, #2d1060 100%);
+      min-height: 88vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 80px 80px 60px;
+      position: relative; overflow: hidden;
+    }
+    #home::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1400') center/cover no-repeat;
+      opacity: .12;
+    }
+    #home .tag {
+      color: var(--red); font-size: .75rem;
+      letter-spacing: 4px; text-transform: uppercase;
+      margin-bottom: 20px; position: relative;
+    }
+    #home h1 {
+      font-family: 'Playfair Display', serif;
+      color: var(--white); font-size: clamp(2.8rem, 6vw, 5.5rem);
+      line-height: 1.05; max-width: 750px;
+      position: relative; margin-bottom: 28px;
+    }
+    #home h1 em { color: var(--red); font-style: normal; }
+    #home p.lead {
+      color: #aaa; font-size: 1.1rem; max-width: 540px;
+      line-height: 1.75; position: relative; margin-bottom: 40px;
+    }
+    #home .cta-row { display: flex; gap: 16px; position: relative; }
+    .btn {
+      display: inline-block; padding: 13px 30px;
+      font-family: 'Source Serif 4', serif;
+      font-size: .9rem; letter-spacing: 1px;
+      text-decoration: none; cursor: pointer;
+      border: none; transition: all .25s;
+    }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-red:hover { background: #a93226; }
+    .btn-outline { border: 1px solid #555; color: #ccc; background: transparent; }
+    .btn-outline:hover { border-color: #fff; color: #fff; }
+
+    /* ── BREAKING TICKER ── */
+    .ticker {
+      background: #7c3aed; color: #fff;
+      display: flex; align-items: center;
+      padding: 10px 0; overflow: hidden;
+    }
+    .ticker .label {
+      background: #1a0a2e; padding: 0 20px;
+      font-size: .75rem; letter-spacing: 2px;
+      text-transform: uppercase; white-space: nowrap; height: 100%;
+      display: flex; align-items: center; flex-shrink: 0;
+    }
+    .ticker-track {
+      display: flex; gap: 80px;
+      animation: ticker 25s linear infinite;
+      white-space: nowrap; font-size: .85rem;
+    }
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 80px 80px; }
+    .section-label {
+      font-size: .7rem; letter-spacing: 5px; text-transform: uppercase;
+      color: var(--red); margin-bottom: 12px;
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      line-height: 1.2; margin-bottom: 40px;
+      border-bottom: 3px solid var(--ink); padding-bottom: 16px;
+    }
+    h3 { font-family: 'Playfair Display', serif; margin-bottom: 12px; font-size: 1.3rem; }
+
+    /* ── ABOUT GRID ── */
+    #about { background: var(--white); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .about-grid img { width: 100%; height: 340px; object-fit: cover; filter: grayscale(30%); }
+    .about-grid p { line-height: 1.85; margin-bottom: 18px; color: #333; }
+
+    /* ── ARTICLES ── */
+    #articles { background: var(--paper); }
+    .articles-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; }
+    .card { background: var(--white); border-top: 3px solid var(--red); }
+    .card img { width: 100%; height: 180px; object-fit: cover; display: block; }
+    .card-body { padding: 20px; }
+    .card-body .cat { font-size: .65rem; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 8px; }
+    .card-body h3 { font-size: 1.1rem; margin-bottom: 10px; }
+    .card-body p { font-size: .88rem; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+    .card-body a { color: var(--red); font-size: .8rem; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; }
+    .card-body a:hover { text-decoration: underline; }
+
+    /* ── LINKS DEMO ── */
+    #links { background: #1a0a2e; color: var(--white); }
+    #links h2 { color: var(--white); border-color: var(--red); }
+    .links-row { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+    .links-row p { color: #aaa; margin-bottom: 16px; line-height: 1.75; }
+    .int-link { color: #c4b5fd; text-decoration: none; display: inline-block; margin: 4px 0; }
+    .int-link:hover { color: #fff; }
+    .ext-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--red); color: #fff; padding: 10px 20px;
+      text-decoration: none; font-size: .85rem; margin-top: 8px;
+      transition: background .2s;
+    }
+    .ext-link:hover { background: #a93226; }
+    .social-icons { display: flex; gap: 16px; margin-top: 24px; flex-wrap: wrap; }
+    .social-icons a {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 18px; text-decoration: none;
+      font-size: .8rem; font-weight: 600; letter-spacing: 1px;
+      transition: transform .2s, opacity .2s;
+    }
+    .social-icons a:hover { transform: translateY(-2px); opacity: .85; }
+    .social-icons .fb { background: #1877f2; color: #fff; }
+    .social-icons .ig { background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color: #fff; }
+    .social-icons .yt { background: #ff0000; color: #fff; }
+    .social-icons .tw { background: #000; color: #fff; border: 1px solid #333; }
+
+    /* ── BOOKING ── */
+    #booking { background: var(--paper); }
+    .booking-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+    .booking-wrap img { width: 100%; height: 360px; object-fit: cover; }
+    .service-list { margin-bottom: 24px; }
+    .service-list li { padding: 10px 0; border-bottom: 1px solid #ddd; font-size: .95rem; color: #333; }
+    .booking-form { display: flex; flex-direction: column; gap: 14px; margin-top: 24px; }
+    .booking-form input,
+    .booking-form select,
+    .booking-form textarea {
+      padding: 12px 16px; border: 1px solid #ccc;
+      font-family: 'Source Serif 4', serif; font-size: .9rem;
+      background: #fff; outline: none;
+      transition: border-color .2s;
+    }
+    .booking-form input:focus,
+    .booking-form select:focus,
+    .booking-form textarea:focus { border-color: var(--red); }
+    .booking-form textarea { height: 110px; resize: vertical; }
+    .contact-box { background: var(--ink); color: #fff; padding: 20px; margin-top: 20px; }
+    .contact-box p { color: #ccc; font-size: .9rem; line-height: 1.8; }
+
+    /* ── STORE ── */
+    #store { background: #120820; color: var(--white); }
+    #store h2 { color: var(--white); border-color: var(--red); }
+    .store-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
+    .product { background: #1e0d38; border-bottom: 3px solid transparent; transition: border-color .3s; }
+    .product:hover { border-color: var(--red); }
+    .product img { width: 100%; height: 200px; object-fit: cover; display: block; filter: brightness(.9); }
+    .product-body { padding: 20px; }
+    .product-body h3 { font-size: 1.05rem; margin-bottom: 8px; color: #fff; }
+    .product-body p { font-size: .85rem; color: #999; line-height: 1.65; margin-bottom: 16px; }
+    .product-footer { display: flex; align-items: center; justify-content: space-between; }
+    .price { font-size: 1.3rem; font-family: 'Playfair Display', serif; color: #c0c0d8; }
+    .cart-btn {
+      background: var(--red); color: #fff; border: none;
+      padding: 8px 16px; cursor: pointer; font-size: .8rem;
+      text-transform: uppercase; letter-spacing: 1px;
+      transition: background .2s;
+    }
+    .cart-btn:hover { background: #a93226; }
+    .cart-toast {
+      display: none; position: fixed; bottom: 30px; right: 30px;
+      background: var(--red); color: #fff; padding: 14px 24px;
+      font-size: .9rem; z-index: 999;
+      animation: fadeInOut 2.5s forwards;
+    }
+    @keyframes fadeInOut {
+      0%{opacity:0;transform:translateY(20px)}
+      15%{opacity:1;transform:translateY(0)}
+      75%{opacity:1}
+      100%{opacity:0}
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink); color: #888;
+      padding: 48px 80px 24px;
+    }
+    .footer-top {
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      gap: 48px; margin-bottom: 40px;
+    }
+    .footer-top h4 {
+      font-family: 'Playfair Display', serif;
+      color: var(--white); margin-bottom: 16px; font-size: 1rem;
+    }
+    .footer-top p { font-size: .85rem; line-height: 1.8; }
+    .footer-top ul { list-style: none; }
+    .footer-top ul li { margin-bottom: 8px; }
+    .footer-top ul a { color: #888; text-decoration: none; font-size: .85rem; transition: color .2s; }
+    .footer-top ul a:hover { color: var(--red); }
+    .footer-bottom {
+      border-top: 1px solid #222;
+      padding-top: 20px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: .78rem;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      color: var(--white); font-size: 1.2rem;
+    }
+    .footer-logo span { color: var(--red); }
+  </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <a href="#home" class="logo">Press<span>Wave</span></a>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#articles">News</a></li>
+    <li><a href="#links">Connect</a></li>
+    <li><a href="#booking">Book</a></li>
+    <li><a href="#store">Store</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="tag">&#9632; Live Coverage · Breaking News · Investigative Reporting</div>
+  <h1>Where Every <em>Story</em> Finds Its Voice</h1>
+  <p class="lead">
+    PressWave Media delivers fearless journalism, broadcast excellence, and multimedia storytelling
+    that keeps communities informed, engaged, and empowered.
+  </p>
+  <div class="cta-row">
+    <a href="#articles" class="btn btn-red">Read Latest News</a>
+    <a href="#booking" class="btn btn-outline">Book a Service</a>
+  </div>
+</section>
+
+<!-- BREAKING TICKER -->
+<div class="ticker">
+  <div class="label">Breaking</div>
+  <div class="ticker-track">
+    <span>&#9679; Global summit on press freedom opens in Geneva &nbsp;&nbsp;&nbsp; &#9679; Local broadcaster wins national journalism award &nbsp;&nbsp;&nbsp; &#9679; Digital newsrooms report record online readership in 2026 &nbsp;&nbsp;&nbsp; &#9679; New media law sparks debate in parliament &nbsp;&nbsp;&nbsp; &#9679; PressWave launches podcast studio in Maseru &nbsp;&nbsp;&nbsp;</span>
+    <span>&#9679; Global summit on press freedom opens in Geneva &nbsp;&nbsp;&nbsp; &#9679; Local broadcaster wins national journalism award &nbsp;&nbsp;&nbsp; &#9679; Digital newsrooms report record online readership in 2026 &nbsp;&nbsp;&nbsp; &#9679; New media law sparks debate in parliament &nbsp;&nbsp;&nbsp; &#9679; PressWave launches podcast studio in Maseru &nbsp;&nbsp;&nbsp;</span>
+  </div>
+</div>
+
+<!-- ABOUT (Q1 – paragraphs, headings, image) -->
+<section id="about">
+  <p class="section-label">Who We Are</p>
+  <h2>About PressWave Media</h2>
+  <div class="about-grid">
+    <img src="https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=800" alt="Journalist at work"/>
+    <div>
+      <h3>Our Mission</h3>
+      <p>
+        PressWave Media was founded on a single conviction: that truthful, independent journalism
+        is the cornerstone of a functioning democracy. Since our launch in 2018, we have grown
+        from a small newsroom in Maseru to a multi-platform media organisation reaching audiences
+        across Southern Africa and beyond.
+      </p>
+      <h3>What We Do</h3>
+      <p>
+        We cover politics, economics, culture, and technology through investigative reports,
+        live broadcasts, podcasts, and digital features. Our team of over 30 journalists,
+        photographers, and editors works around the clock to ensure our audience receives
+        accurate, timely, and contextual reporting on the stories that matter most.
+      </p>
+      <h3>Our Values</h3>
+      <p>
+        Accuracy, fairness, and editorial independence are non-negotiable at PressWave.
+        We hold power to account, amplify marginalised voices, and foster public discourse
+        through rigorous and ethical journalism. Every story we publish reflects our commitment
+        to serving the public interest above all else.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ARTICLES (Q1 – content) -->
+<section id="articles">
+  <p class="section-label">Latest Stories</p>
+  <h2>News &amp; Features</h2>
+  <div class="articles-grid">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600" alt="Press freedom"/>
+      <div class="card-body">
+        <div class="cat">Investigative</div>
+        <h3>The State of Press Freedom in 2026</h3>
+        <p>An in-depth look at how governments across Africa are reshaping media laws and what it means for journalists on the ground.</p>
+        <a href="#articles">Read More →</a>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=600" alt="Podcast studio"/>
+      <div class="card-body">
+        <div class="cat">Broadcasting</div>
+        <h3>How Podcasting Is Reshaping African Media</h3>
+        <p>Independent audio journalism is booming. We speak to creators who are building audiences without traditional broadcast infrastructure.</p>
+        <a href="#articles">Read More →</a>
+      </div>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?w=600" alt="Digital newsroom"/>
+      <div class="card-body">
+        <div class="cat">Technology</div>
+        <h3>AI in the Newsroom: Tool or Threat?</h3>
+        <p>Editors and reporters debate artificial intelligence's growing role in content generation, fact-checking, and audience analytics.</p>
+        <a href="#articles">Read More →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LINKS & SOCIAL (Q2) -->
+<section id="links">
+  <p class="section-label" style="color:#e74c3c">Connect</p>
+  <h2>Hyperlinks &amp; Social Media</h2>
+  <div class="links-row">
+    <div>
+      <h3 style="color:#fff; margin-bottom:12px;">Internal Navigation</h3>
+      <p>Jump directly to the sections of our site:</p>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <a class="int-link" href="#booking">&#9658; Visit our Booking Page</a>
+        <a class="int-link" href="#store">&#9658; Browse the Media Store</a>
+        <a class="int-link" href="#about">&#9658; Learn About PressWave</a>
+        <a class="int-link" href="#articles">&#9658; Read the Latest News</a>
+      </div>
+
+      <h3 style="color:#fff; margin-top:32px; margin-bottom:12px;">External News Source</h3>
+      <p>Stay informed with global journalism coverage:</p>
+      <a class="ext-link" href="https://www.bbc.com/news" target="_blank" rel="noopener">
+        &#127758; Visit BBC News
+      </a>
+      <br>
+      <a class="ext-link" href="https://www.reuters.com" target="_blank" rel="noopener" style="margin-top:8px; background:#333;">
+        &#127758; Visit Reuters
+      </a>
+    </div>
+    <div>
+      <h3 style="color:#fff; margin-bottom:12px;">Follow Us on Social Media</h3>
+      <p>Join our growing community across all major platforms and never miss a story.</p>
+      <div class="social-icons">
+        <a class="fb" href="https://facebook.com" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          Facebook
+        </a>
+        <a class="ig" href="https://instagram.com" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          Instagram
+        </a>
+        <a class="yt" href="https://youtube.com" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.95C5.12 20 12 20 12 20s6.88 0 8.59-.47a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#ff0000"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/></svg>
+          YouTube
+        </a>
+        <a class="tw" href="https://x.com" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          X (Twitter)
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING (Q3) -->
+<section id="booking">
+  <p class="section-label">Media Services</p>
+  <h2>Book a Studio or Service</h2>
+  <div class="booking-wrap">
+    <div>
+      <img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=800" alt="Podcast studio booking"/>
+      <div class="contact-box" style="margin-top:20px">
+        <h4 style="color:#fff;font-family:'Playfair Display',serif;margin-bottom:12px;">Contact Details</h4>
+        <p>
+          &#128205; 14 Media Street, Maseru, Lesotho 100<br>
+          &#128222; +266 5800 0000<br>
+          &#128231; bookings@presswave.co.ls<br>
+          &#128336; Mon–Fri: 08:00–18:00 · Sat: 09:00–14:00
+        </p>
+      </div>
+    </div>
+    <div>
+      <h3>Our Media Services</h3>
+      <ul class="service-list">
+        <li>&#127897; Podcast Studio Booking (per hour)</li>
+        <li>&#127909; Event Photography &amp; Videography</li>
+        <li>&#127908; Radio Show Slot Appointment</li>
+        <li>&#128247; Corporate Media Production</li>
+        <li>&#127916; Live Event Coverage Package</li>
+      </ul>
+
+      <h3>Request a Booking</h3>
+      <div class="booking-form">
+        <input type="text" placeholder="Your Full Name" required/>
+        <input type="email" placeholder="Email Address" required/>
+        <input type="tel" placeholder="Phone Number"/>
+        <select>
+          <option value="" disabled selected>Select a Service</option>
+          <option>Podcast Studio Booking</option>
+          <option>Event Photography</option>
+          <option>Radio Show Appointment</option>
+          <option>Corporate Media Production</option>
+          <option>Live Event Coverage</option>
+        </select>
+        <input type="date"/>
+        <textarea placeholder="Additional notes or requirements..."></textarea>
+        <button class="btn btn-red" onclick="submitBooking(event)" style="padding:14px;font-size:.95rem;letter-spacing:1px;">
+          Submit Booking Request
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORE (Q4) -->
+<section id="store">
+  <p class="section-label" style="color:#e74c3c;">Media Store</p>
+  <h2>Shop Media Equipment &amp; Resources</h2>
+  <div class="store-grid">
+    <div class="product">
+      <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600" alt="Podcast Microphone"/>
+      <div class="product-body">
+        <h3>Pro Podcast Microphone</h3>
+        <p>Studio-quality condenser microphone with USB-C connectivity. Ideal for podcasters, journalists, and voice-over artists.</p>
+        <div class="product-footer">
+          <span class="price">M 2,499</span>
+          <button class="cart-btn" onclick="addToCart('Pro Podcast Microphone')">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="product">
+      <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=600" alt="Camera equipment"/>
+      <div class="product-body">
+        <h3>DSLR Camera Kit</h3>
+        <p>Full-frame camera bundle with 24–70mm lens, memory cards, and a professional carry bag for field journalists.</p>
+        <div class="product-footer">
+          <span class="price">M 18,999</span>
+          <button class="cart-btn" onclick="addToCart('DSLR Camera Kit')">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="product">
+      <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600" alt="Journalism Books"/>
+      <div class="product-body">
+        <h3>Journalism Essentials Bundle</h3>
+        <p>A curated set of 5 must-read books on investigative journalism, media ethics, and digital storytelling techniques.</p>
+        <div class="product-footer">
+          <span class="price">M 850</span>
+          <button class="cart-btn" onclick="addToCart('Journalism Essentials Bundle')">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="product">
+      <img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=600" alt="Media production service"/>
+      <div class="product-body">
+        <h3>Media Production Package</h3>
+        <p>Full-day studio hire with a producer, sound engineer, and post-production editing for corporate media projects.</p>
+        <div class="product-footer">
+          <span class="price">M 9,500</span>
+          <button class="cart-btn" onclick="addToCart('Media Production Package')">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="product">
+      <img src="https://images.unsplash.com/photo-1512446816042-444d641267d4?w=600" alt="Portable recorder"/>
+      <div class="product-body">
+        <h3>Field Audio Recorder</h3>
+        <p>Compact 32-track digital recorder with XLR inputs, perfect for on-location news reporting and interviews.</p>
+        <div class="product-footer">
+          <span class="price">M 3,200</span>
+          <button class="cart-btn" onclick="addToCart('Field Audio Recorder')">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+    <div class="product">
+      <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=600" alt="Lighting kit"/>
+      <div class="product-body">
+        <h3>Studio Lighting Kit</h3>
+        <p>Three-point LED lighting set with softboxes and adjustable colour temperature. Perfect for video interviews and broadcasts.</p>
+        <div class="product-footer">
+          <span class="price">M 4,750</span>
+          <button class="cart-btn" onclick="addToCart('Studio Lighting Kit')">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <h4>PressWave Media</h4>
+      <p>Delivering honest, independent journalism to Southern Africa and beyond. We believe an informed public is the foundation of a just society.</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#articles">News</a></li>
+        <li><a href="#booking">Book a Service</a></li>
+        <li><a href="#store">Store</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Use</a></li>
+        <li><a href="#">Editorial Charter</a></li>
+        <li><a href="#">Advertise with Us</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-logo">Press<span>Wave</span></span>
+    <span>&copy; 2026 PressWave Media. All rights reserved. Maseru, Lesotho.</span>
+  </div>
+</footer>
+
+<!-- CART TOAST -->
+<div class="cart-toast" id="toast"></div>
+
+<script>
+  function addToCart(name) {
+    const toast = document.getElementById('toast');
+    toast.textContent = '🛒 Added to cart: ' + name;
+    toast.style.display = 'block';
+    toast.style.animation = 'none';
+    void toast.offsetWidth;
+    toast.style.animation = 'fadeInOut 2.5s forwards';
+    setTimeout(() => { toast.style.display = 'none'; }, 2600);
+  }
+
+  function submitBooking(e) {
+    e.preventDefault();
+    alert('✅ Booking request submitted! We will contact you within 24 hours.');
+  }
+</script>
+</body>
+</html>
